@@ -46,6 +46,9 @@
     <Filter Include="ShaderMgr">
       <UniqueIdentifier>{98ccd8ac-c63e-4199-843d-298908d1c06c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LoadFile">
+      <UniqueIdentifier>{1863bca9-402a-4e7d-9447-b7de27970701}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\DirectDrawing.h">
@@ -144,9 +147,6 @@
     <ClInclude Include="Header\SceneManager.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Header\LoadFile.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Header\EngineGeneral.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -161,6 +161,12 @@
     </ClInclude>
     <ClInclude Include="ShaderMgr\ShaderManager.h">
       <Filter>ShaderMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\LoadFile.h">
+      <Filter>LoadFile</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadFile\LoadTTF.h">
+      <Filter>LoadFile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +251,6 @@
     <ClCompile Include="Source\SceneManager.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LoadFile.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\EngineTestScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -259,6 +262,12 @@
     </ClCompile>
     <ClCompile Include="ShaderMgr\ShaderManager.cpp">
       <Filter>ShaderMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadFile.cpp">
+      <Filter>LoadFile</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadFile\LoadTTF.cpp">
+      <Filter>LoadFile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

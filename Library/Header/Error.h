@@ -13,7 +13,7 @@ static constexpr int FUNCTION_ERROR = -1;
 namespace Engine
 {
 // エラーログを出力ウィンドウに出力し、終了する
-static int ErrorLog(const std::string& str, const bool& flag = true, const char* file = __FILE__, const int& line = __LINE__)
+static int Error(const std::string& str, const bool& flag = true, const char* file = __FILE__, const int& line = __LINE__)
 {
 	if (flag == false)
 	{
@@ -34,4 +34,5 @@ static int ErrorLog(const std::string& str, const bool& flag = true, const char*
 
 	return FUNCTION_ERROR;
 }
+#define ErrorLog(str, flag) Error(str, flag, __FILE__, __LINE__)
 } // Engine

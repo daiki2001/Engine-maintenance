@@ -204,6 +204,7 @@
     <ClInclude Include="Header\SceneChenge.h" />
     <ClInclude Include="Header\SceneManager.h" />
     <ClInclude Include="Header\Win32API.h" />
+    <ClInclude Include="LoadFile\LoadTTF.h" />
     <ClInclude Include="Math\Collision\BaseCollider.h" />
     <ClInclude Include="Math\Collision\Collision.h" />
     <ClInclude Include="Math\Collision\CollisionInfo.h" />
@@ -222,6 +223,7 @@
     <ClInclude Include="ShaderMgr\Shaders.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LoadFile\LoadTTF.cpp" />
     <ClCompile Include="Math\Collision\Collision.cpp" />
     <ClCompile Include="Math\Collision\CollisionManager.cpp" />
     <ClCompile Include="Math\Collision\CollisionPrimitive.cpp" />

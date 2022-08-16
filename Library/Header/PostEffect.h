@@ -10,9 +10,9 @@ private: //エイリアス
 	template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 	using Vector3 = Engine::Math::Vector3;
 	using Matrix4 = Engine::Math::Matrix4;
-	
+
 private: //定数
-		
+
 public: //メンバ変数
 	Vector3 position;        //座標
 	float angle;             //回転角度

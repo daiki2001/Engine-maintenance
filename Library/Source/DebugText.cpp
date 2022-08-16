@@ -10,13 +10,20 @@ UINT DebugText::fontTexHeight = {};
 DebugText::DebugText() :
 	LoadTex(),
 	fontIndex{},
-	charCount(-1)
+	charCount(-1),
+	font{}
 {
+	Init();
 }
 
 DebugText::~DebugText()
 {
 	DataClear();
+}
+
+void DebugText::Init()
+{
+	font.LoadFont();
 }
 
 HRESULT DebugText::DrawStringInit()
