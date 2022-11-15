@@ -8,8 +8,14 @@
 namespace Engine
 {
 static const std::string resourcesDirectory = "./Resources/";               //リソースディレクトリ
-static const std::string shadersDirectory = resourcesDirectory + "shaders/"; //シェーダーディレクトリ
-static const std::string defaultTextureFileName = "white1x1.png";           //デフォルト画像
+#ifdef ENGINE_EXPORTS
+static const std::string engineResourcesDir = "./Engine/Resources/";
+#elif GAME_EXPORTS
+static const std::string engineResourcesDir = "./Engine/Resources/";
+#else
+static const std::string engineResourcesDir = "./Resources/Engine/";
+#endif
+static const std::string shadersDirectory = engineResourcesDir + "shaders/"; //シェーダーディレクトリ
 } //Engine
 
 /*関数*/

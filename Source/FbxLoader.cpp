@@ -351,7 +351,7 @@ void FbxLoader::ParseMaterial(Model* model, FbxNode* fbxNode)
 		// テクスチャがない場合は白テクスチャを貼る
 		if (textureLoaded == false)
 		{
-			LoadTexture(model, resourcesDirectory + "Engine/" + defaultTextureFileName);
+			LoadTexture(model, engineResourcesDir + "white1x1.png");
 		}
 	}
 }
