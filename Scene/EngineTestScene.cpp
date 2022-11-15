@@ -10,8 +10,8 @@ ShaderManager* shaderMgr = ShaderManager::Get();
 DirectX::XMFLOAT4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
 }
 
-EngineTestScene::EngineTestScene(DrawPolygon* draw, SceneChenger* sceneChenger) :
-	BaseScene(draw, sceneChenger),
+EngineTestScene::EngineTestScene(SceneChanger* sceneChanger) :
+	BaseScene(sceneChanger),
 	fbxLoader(FbxLoader::GetInstance()),
 	background(FUNCTION_ERROR),
 	fbxModel(FUNCTION_ERROR),

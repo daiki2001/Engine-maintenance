@@ -1026,7 +1026,7 @@ int DrawPolygon::DrawPolygonInit()
 	{
 		isDrawPolygonInit = true;
 
-		if (LoadTextrue() == FUNCTION_ERROR)
+		if (FAILED(CreateDescriptorHeap()))
 		{
 			return FUNCTION_ERROR;
 		}

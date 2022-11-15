@@ -138,23 +138,8 @@
     <ClInclude Include="Header\RenderTexture.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Header\BaseScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Header\SceneChenge.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Header\SceneManager.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Header\EngineGeneral.h">
       <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\EngineTestScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\TestObject.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="ShaderMgr\Shaders.h">
       <Filter>ShaderMgr</Filter>
@@ -167,6 +152,24 @@
     </ClInclude>
     <ClInclude Include="File\WriteFile.h">
       <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\BaseScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\EngineTestScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneChange.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneChangeAnimation.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\TestObject.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,18 +248,6 @@
     <ClCompile Include="Source\RenderTexture.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BaseScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneManager.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\EngineTestScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\TestObject.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="ShaderMgr\Shaders.cpp">
       <Filter>ShaderMgr</Filter>
     </ClCompile>
@@ -268,6 +259,21 @@
     </ClCompile>
     <ClCompile Include="File\WriteFile.cpp">
       <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\BaseScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\EngineTestScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneChangeAnimation.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TestObject.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

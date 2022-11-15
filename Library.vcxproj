@@ -189,7 +189,6 @@
     <ClInclude Include="File\LoadFile.h" />
     <ClInclude Include="File\WriteFile.h" />
     <ClInclude Include="Header\Audio.h" />
-    <ClInclude Include="Header\BaseScene.h" />
     <ClInclude Include="Header\Camera.h" />
     <ClInclude Include="Header\DebugText.h" />
     <ClInclude Include="Header\DirectDrawing.h" />
@@ -206,8 +205,6 @@
     <ClInclude Include="Header\PostEffect.h" />
     <ClInclude Include="Header\RenderTexture.h" />
     <ClInclude Include="Header\SafeDelete.h" />
-    <ClInclude Include="Header\SceneChenge.h" />
-    <ClInclude Include="Header\SceneManager.h" />
     <ClInclude Include="Header\Win32API.h" />
     <ClInclude Include="Math\Collision\BaseCollider.h" />
     <ClInclude Include="Math\Collision\Collision.h" />
@@ -221,7 +218,11 @@
     <ClInclude Include="Math\Matrix4.h" />
     <ClInclude Include="Math\Quaternion.h" />
     <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Scene\BaseScene.h" />
     <ClInclude Include="Scene\EngineTestScene.h" />
+    <ClInclude Include="Scene\SceneChange.h" />
+    <ClInclude Include="Scene\SceneChangeAnimation.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\TestObject.h" />
     <ClInclude Include="ShaderMgr\ShaderManager.h" />
     <ClInclude Include="ShaderMgr\Shaders.h" />
@@ -238,12 +239,14 @@
     <ClCompile Include="Math\Matrix4.cpp" />
     <ClCompile Include="Math\Quaternion.cpp" />
     <ClCompile Include="Math\Vector3.cpp" />
+    <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="Scene\EngineTestScene.cpp" />
+    <ClCompile Include="Scene\SceneChangeAnimation.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\TestObject.cpp" />
     <ClCompile Include="ShaderMgr\ShaderManager.cpp" />
     <ClCompile Include="ShaderMgr\Shaders.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
-    <ClCompile Include="Source\BaseScene.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\DebugText.cpp" />
     <ClCompile Include="Source\DirectDrawing.cpp" />
@@ -258,7 +261,6 @@
     <ClCompile Include="Source\Parameter.cpp" />
     <ClCompile Include="Source\PostEffect.cpp" />
     <ClCompile Include="Source\RenderTexture.cpp" />
-    <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\Win32API.cpp" />
   </ItemGroup>
   <ItemGroup>

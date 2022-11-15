@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "./Header/BaseScene.h"
+#include "BaseScene.h"
 #include "./Header/EngineGeneral.h"
 #include "./Math/Collision/Collision.h"
 #include "TestObject.h"
@@ -16,7 +16,7 @@ public: // エイリアス
 public: // 定数
 
 public: // メンバ関数
-	EngineTestScene(DrawPolygon* draw, SceneChenger* sceneChenger);
+	EngineTestScene(SceneChanger* sceneChanger);
 	~EngineTestScene() override;
 
 	void Init() override;

@@ -45,13 +45,16 @@ private:
 	UINT spriteCount;
 
 	// 関数の初期化フラグ
-	bool isLoadTextrueInit = false;
+	bool isLoadTex = false;
 	bool isDrawTextrueInit = false;
 
 	/*メンバ関数*/
 public:
 	LoadTex();
 	~LoadTex();
+
+	// ディスクリプタヒープの生成
+	int CreateDescriptorHeap();
 
 	// テクスチャバッファの生成
 	int LoadTextrue(const wchar_t* fileName = nullptr);
