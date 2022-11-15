@@ -32,8 +32,14 @@ void SceneManager::Loop() const
 	BaseScene::ChangeAnimationUpdate();
 	Camera::Update();
 
+	static auto w = DirectXInit::GetInstance();
+	w->ClearScreen();
 	sceneStack.top()->Draw();
 	BaseScene::ChangeAnimationDraw();
+	w->ScreenFlip();
+
+	// ループの終了処理
+	draw->PolygonLoopEnd();
 }
 
 void SceneManager::SceneChange(SceneChanger::Scene scene, bool stackClear)

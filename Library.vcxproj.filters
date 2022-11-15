@@ -138,9 +138,6 @@
     <ClInclude Include="Header\RenderTexture.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Header\EngineGeneral.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderMgr\Shaders.h">
       <Filter>ShaderMgr</Filter>
     </ClInclude>
@@ -170,6 +167,9 @@
     </ClInclude>
     <ClInclude Include="Scene\TestObject.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\EngineGeneral.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

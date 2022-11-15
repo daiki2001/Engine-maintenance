@@ -7,14 +7,8 @@
 /*定数*/
 namespace Engine
 {
-static const std::string resourcesDirectory = "./Resources/";               //リソースディレクトリ
-#ifdef ENGINE_EXPORTS
-static const std::string engineResourcesDir = "./Engine/Resources/";
-#elif GAME_EXPORTS
-static const std::string engineResourcesDir = "./Engine/Resources/";
-#else
-static const std::string engineResourcesDir = "./Resources/Engine/";
-#endif
+static const std::string resourcesDirectory = "./Resources/"; //リソースディレクトリ
+static const std::string engineResourcesDir = resourcesDirectory;
 static const std::string shadersDirectory = engineResourcesDir + "shaders/"; //シェーダーディレクトリ
 } //Engine
 

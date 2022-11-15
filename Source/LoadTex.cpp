@@ -33,6 +33,28 @@ LoadTex::~LoadTex()
 	DataClear();
 }
 
+HRESULT LoadTex::CreateDescriptorHeap()
+{
+	HRESULT hr = S_FALSE;
+	static auto* dev = DirectXInit::GetDevice();
+	
+	if (isLoadTexInit == true)
+	{
+		return S_OK;
+	}
+
+	isLoadTexInit = true;
+
+	D3D12_DESCRIPTOR_HEAP_DESC descHeapDesc{}; //設定構造体
+	descHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+	descHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE; //シェーダから見える
+	descHeapDesc.NumDescriptors = (UINT)(50000); //テクスチャバッファの数
+	// デスクリプタヒープの生成
+	hr = dev->CreateDescriptorHeap(&descHeapDesc, IID_PPV_ARGS(&texCommonData.descHeap));
+	
+	return hr;
+}
+
 int LoadTex::LoadTextrue(const wchar_t* fileName)
 {
 	using namespace Engine;
@@ -42,20 +64,9 @@ int LoadTex::LoadTextrue(const wchar_t* fileName)
 	CD3DX12_RESOURCE_DESC texResDesc{};
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{}; //設定構造体
 
-	if (isLoadTextrueInit == false)
+	if (FAILED(CreateDescriptorHeap()))
 	{
-		isLoadTextrueInit = true;
-
-		D3D12_DESCRIPTOR_HEAP_DESC descHeapDesc{}; //設定構造体
-		descHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-		descHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE; //シェーダから見える
-		descHeapDesc.NumDescriptors = (UINT)(50000); //テクスチャバッファの数
-		// デスクリプタヒープの生成
-		hr = dev->CreateDescriptorHeap(&descHeapDesc, IID_PPV_ARGS(&texCommonData.descHeap));
-		if (FAILED(hr))
-		{
-			return FUNCTION_ERROR;
-		}
+		return FUNCTION_ERROR;
 	}
 
 	if (fileName == nullptr)

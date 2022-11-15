@@ -9,7 +9,6 @@ BaseScene::BaseScene(SceneChanger* sceneChanger) :
 	isSceneDest(false),
 	nextScene(SceneChanger::Scene::Title)
 {
-	changeAnimation = BaseScene::draw;
 }
 
 BaseScene::~BaseScene()

@@ -195,8 +195,6 @@ void EngineTestScene::Draw()
 
 	postEffect.PostDraw();
 
-	w->ClearScreen();
-
 	shaderMgr->ChangePipelineState(
 		DirectXInit::GetCommandList(),
 		DirectDrawing::GetSpriteRootSignature(),
@@ -248,8 +246,4 @@ void EngineTestScene::Draw()
 		"%d",
 		useShader
 	);
-	w->ScreenFlip();
-
-	// ループの終了処理
-	draw->PolygonLoopEnd();
 }

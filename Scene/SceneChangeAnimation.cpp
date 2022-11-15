@@ -5,7 +5,7 @@
 
 namespace
 {
-constexpr int maxSize = 880;
+constexpr int maxSize = 1300;
 }
 
 DrawPolygon* SceneChangeAnimation::draw = nullptr;
@@ -33,7 +33,7 @@ void SceneChangeAnimation::Init()
 {
 	isAnimation = false;
 	isChange = false;
-	radius = maxSize;
+	radius = 1;
 
 	Load();
 }
@@ -84,12 +84,12 @@ void SceneChangeAnimation::Draw()
 			draw->ChangeSpriteShader();
 			draw->DrawTextrue(winW / 2.0f,
 							  winH / 2.0f,
-							  static_cast<float>(winW),
-							  static_cast<float>(winH),
+							  static_cast<float>(radius),
+							  static_cast<float>(radius),
 							  0.0f,
 							  Parameter::Get("white1x1"),
 							  DirectX::XMFLOAT2(0.5f, 0.5f),
-							  DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f));
+							  DirectX::XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
 		}
 	}
 	else
