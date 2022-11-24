@@ -34,8 +34,14 @@ public:
 	Vector3& operator/=(float s);
 
 	// 比較演算子オーバーロード
-	bool operator==(const Vector3& v);
-	bool operator!=(const Vector3& v);
+	bool operator==(const Vector3& v) const;
+	bool operator!=(const Vector3& v) const;
+
+	// 関係演算子オーバーロード
+	bool operator<(const Vector3& v) const;
+	bool operator>(const Vector3& v) const;
+	bool operator<=(const Vector3& v) const;
+	bool operator>=(const Vector3& v) const;
 };
 
 // 2項演算子オーバーロード

@@ -98,14 +98,51 @@ Vector3& Vector3::operator/=(float s)
 	return *this;
 }
 
-bool Vector3::operator==(const Vector3& v)
+bool Vector3::operator==(const Vector3& v) const
 {
 	return this->x == v.x && this->y == v.y && this->z == v.z;
 }
 
-bool Vector3::operator!=(const Vector3& v)
+bool Vector3::operator!=(const Vector3& v) const
 {
 	return !(*this == v);
+}
+
+bool Vector3::operator<(const Vector3& v) const
+{
+	if (this->x < v.x)
+	{
+		return true;
+	}
+	else if (this->x == v.x)
+	{
+		if (this->y < v.y)
+		{
+			return true;
+		}
+		else if (this->y == v.y)
+		{
+			return this->z < v.z;
+		}
+	}
+
+	return false;
+}
+
+bool Vector3::operator>(const Vector3& v) const
+{
+	return v < *this;
+}
+
+bool Vector3::operator<=(const Vector3& v) const
+{
+	if (*this == v) return true;
+	return *this < v;
+}
+
+bool Vector3::operator>=(const Vector3& v) const
+{
+	return v <= *this;
 }
 
 const Vector3 operator+(const Vector3& v1, const Vector3& v2)

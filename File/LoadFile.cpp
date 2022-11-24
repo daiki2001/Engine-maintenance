@@ -5,7 +5,7 @@ namespace Engine
 {
 namespace File
 {
-int LoadMapChip(const char* filePath, int* mapArray, int mapSize, int LoadStopNumber)
+int LoadMapChip(const char* filePath, int* mapArray, int mapSize, bool isNumberStop, int LoadStopNumber)
 {
 	if (filePath == nullptr)
 	{
@@ -59,7 +59,7 @@ int LoadMapChip(const char* filePath, int* mapArray, int mapSize, int LoadStopNu
 				}
 			}
 
-			if ((index >= mapSize) || (mapArray[index] == LoadStopNumber))
+			if ((index >= mapSize) || ((isNumberStop) && mapArray[index] == LoadStopNumber))
 			{
 				// ヒットしたら、読み込みを強制的に終了する。
 				end = true;
@@ -76,7 +76,7 @@ int LoadMapChip(const char* filePath, int* mapArray, int mapSize, int LoadStopNu
 	return 0;
 }
 
-int LoadMapChip(FILE* fileHandle, int* mapArray, int mapSize, int LoadStopNumber)
+int LoadMapChip(FILE* fileHandle, int* mapArray, int mapSize, bool isNumberStop, int LoadStopNumber)
 {
 	for (int i = 0; i < mapSize; i++)
 	{
@@ -118,7 +118,7 @@ int LoadMapChip(FILE* fileHandle, int* mapArray, int mapSize, int LoadStopNumber
 				}
 			}
 
-			if ((index >= mapSize) || (mapArray[index] == LoadStopNumber))
+			if ((index >= mapSize) || ((isNumberStop) && mapArray[index] == LoadStopNumber))
 			{
 				// ヒットしたら、読み込みを強制的に終了する。
 				end = true;
