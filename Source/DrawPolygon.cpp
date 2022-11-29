@@ -511,6 +511,14 @@ int DrawPolygon::CreateOBJModel(const char* filePath, const char* directoryPath)
 {
 	if (filePath == nullptr) { return FUNCTION_ERROR; }
 
+	for (size_t i = 0; i < obj.size(); i++)
+	{
+		if (obj[i].name.compare(filePath) == 0)
+		{
+			return static_cast<int>(i);
+		}
+	}
+
 	using namespace std;
 	using XMFLOAT2 = DirectX::XMFLOAT2;
 	HRESULT hr;
@@ -519,6 +527,7 @@ int DrawPolygon::CreateOBJModel(const char* filePath, const char* directoryPath)
 	ifstream file;
 	const string modelPath = filePath;
 	file.open(modelPath);
+	if (file.fail()) return FUNCTION_ERROR;
 
 	vector<Vector3> positions;  //頂点座標
 	vector<Vector3> normals;    //法線ベクトル
@@ -673,6 +682,7 @@ int DrawPolygon::CreateOBJModel(const char* filePath, const char* directoryPath)
 
 			isFaceStart = false;
 			obj.emplace_back(OBJData{});
+			obj.back().name = filePath;
 			if (parent == nullptr)
 			{
 				parent = &obj.back();
@@ -1060,8 +1070,7 @@ int DrawPolygon::Draw(
 	bool isOrthoGraphic, bool viewMultiFlag, Object* parent)
 {
 	if ((polygonData < 0 || (size_t)polygonData >= vertices.size()) ||
-		(graphHandle < 0 || (UINT)graphHandle > textrueCount)/* ||
-		(parent < -1 && (parent != -1 && (size_t)parent >= obj.size()))*/)
+		(graphHandle < 0 || (UINT)graphHandle > textrueCount))
 	{
 		return FUNCTION_ERROR;
 	}
@@ -1182,8 +1191,7 @@ int DrawPolygon::DrawOBJ(int object, const Vector3& position, const Matrix4& rot
 						 const XMFLOAT4& color, bool isOrthoGraphic, bool viewMultiFlag, Object* parent)
 {
 	if ((obj[object].polygonData < 0 || (size_t)obj[object].polygonData >= vertices.size()) ||
-		(obj[object].material.textrueIndex < 0 || (UINT)obj[object].material.textrueIndex > textrueCount)/* ||
-		(parent < -1 && (parent != -1 && (size_t)parent >= obj.size()))*/)
+		(obj[object].material.textrueIndex < 0 || (UINT)obj[object].material.textrueIndex > textrueCount))
 	{
 		return FUNCTION_ERROR;
 	}

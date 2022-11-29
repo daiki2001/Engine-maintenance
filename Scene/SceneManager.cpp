@@ -7,6 +7,7 @@
 #include "../Scene/GameScene.h"
 #include "../Scene/SettingScene.h"
 #include "../Scene/StageEditorScene.h"
+#include "../Scene/StageSelectScene.h"
 
 #include "./Header/Error.h"
 
@@ -67,6 +68,9 @@ void SceneManager::SceneChange(SceneChanger::Scene scene, bool stackClear)
 		break;
 	case SceneChanger::Scene::StageEditer:
 		sceneStack.push(make_shared<StageEditorScene>(this));
+		break;
+	case SceneChanger::Scene::StageSelect:
+		sceneStack.push(make_shared<StageSelectScene>(this));
 		break;
 	default:
 		Engine::ErrorLog("存在しないシーンが呼ばれました\n", true);

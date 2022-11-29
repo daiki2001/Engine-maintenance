@@ -8,7 +8,8 @@ public: // サブクラス
 		Title,
 		Game,
 		Setting,
-		StageEditer
+		StageEditer,
+		StageSelect
 	};
 
 public: // メンバ関数

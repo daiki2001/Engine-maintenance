@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Win32API.h"
 #include <d3d12.h>
 #include <dxgi1_6.h>
@@ -11,39 +11,37 @@
 
 class DirectXInit final : public Win32API
 {
-public: //ƒVƒ“ƒOƒ‹ƒgƒ“‰»
-	// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ìæ“¾
+public: //ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³åŒ–
+	// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å–å¾—
 	static DirectXInit* GetInstance();
 private:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğprivate‚É‚·‚é
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’privateã«ã™ã‚‹
 	DirectXInit();
-	// ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğ–³Œø‚É‚·‚é
+	// ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’ç„¡åŠ¹ã«ã™ã‚‹
 	DirectXInit(const DirectXInit& obj) = delete;
-	// ƒfƒXƒgƒ‰ƒNƒ^‚ğprivate‚É‚·‚é
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’privateã«ã™ã‚‹
 	~DirectXInit() {}
-	// ‘ã“ü‰‰Zq‚ğ–³Œø‚É‚·‚é
+	// ä»£å…¥æ¼”ç®—å­ã‚’ç„¡åŠ¹ã«ã™ã‚‹
 	DirectXInit operator=(const DirectXInit& obj) = delete;
 
-protected: // ƒGƒCƒŠƒAƒX
-	// std::‚ğÈ—ª
+protected: // ã‚¨ã‚¤ãƒªã‚¢ã‚¹
 	template<class T> using vector = std::vector<T>;
-	// Microsoft::WRL::‚ğÈ—ª
 	template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
-public: // Ã“Iƒƒ“ƒo•Ï”
+public: // é™çš„ãƒ¡ãƒ³ãƒå¤‰æ•°
 	static bool EngineDebug;
 private:
-	static ComPtr<ID3D12Device> dev; //D3D12ƒfƒoƒCƒX
-	static ComPtr<ID3D12GraphicsCommandList> cmdList; //ƒRƒ}ƒ“ƒhƒŠƒXƒg
+	static ComPtr<ID3D12Device> dev; //D3D12ãƒ‡ãƒã‚¤ã‚¹
+	static ComPtr<ID3D12GraphicsCommandList> cmdList; //ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆ
 
-public: // Ã“Iƒƒ“ƒoŠÖ”
-	// D3D12ƒfƒoƒCƒX‚Ìæ“¾
+public: // é™çš„ãƒ¡ãƒ³ãƒé–¢æ•°
+	// D3D12ãƒ‡ãƒã‚¤ã‚¹ã®å–å¾—
 	static ID3D12Device* GetDevice() { return dev.Get(); };
-	// ƒRƒ}ƒ“ƒhƒŠƒXƒg‚Ìæ“¾
+	// ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆã®å–å¾—
 	static ID3D12GraphicsCommandList* GetCommandList() { return cmdList.Get(); };
 
-public: // ƒƒ“ƒo•Ï”
-	float clearColor[4]; //”wŒiF
+public: // ãƒ¡ãƒ³ãƒå¤‰æ•°
+	float clearColor[4]; //èƒŒæ™¯è‰²
 protected:
 	ComPtr<IDXGIFactory6> dxgiFactory;
 	ComPtr<IDXGISwapChain4> swapchain;
@@ -51,44 +49,44 @@ protected:
 	ComPtr<ID3D12CommandQueue> cmdQueue;
 	ComPtr<ID3D12DescriptorHeap> rtvHeaps;
 
-	vector<ComPtr<IDXGIAdapter1>> adapters; //ƒAƒ_ƒvƒ^[‚Ì—ñ‹“—p
-	ComPtr<IDXGIAdapter1> tmpAdapter;       //‚±‚±‚É“Á’è‚Ì–¼‘O‚ğ‚ÂƒAƒ_ƒvƒ^[ƒIƒuƒWƒFƒNƒg‚ª“ü‚é
+	vector<ComPtr<IDXGIAdapter1>> adapters; //ã‚¢ãƒ€ãƒ—ã‚¿ãƒ¼ã®åˆ—æŒ™ç”¨
+	ComPtr<IDXGIAdapter1> tmpAdapter;       //ã“ã“ã«ç‰¹å®šã®åå‰ã‚’æŒã¤ã‚¢ãƒ€ãƒ—ã‚¿ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒå…¥ã‚‹
 
-	D3D_FEATURE_LEVEL levels[4]; //‘Î‰ƒŒƒxƒ‹‚Ì”z—ñ
+	D3D_FEATURE_LEVEL levels[4]; //å¯¾å¿œãƒ¬ãƒ™ãƒ«ã®é…åˆ—
 	D3D_FEATURE_LEVEL featureLevel;
 
-	D3D12_COMMAND_QUEUE_DESC cmdQueueDesc;     //•W€İ’è‚ÅƒRƒ}ƒ“ƒhƒLƒ…[‚ğ¶¬
-	DXGI_SWAP_CHAIN_DESC1 swapchainDesc;       //Šeíİ’è‚ğ‚µ‚ÄƒXƒƒbƒvƒ`ƒFƒCƒ“‚ğ¶¬
-	D3D12_DESCRIPTOR_HEAP_DESC heapDesc;       //Šeíİ’è‚ğ‚µ‚ÄƒfƒXƒNƒŠƒvƒ^ƒq[ƒv‚ğ¶¬
-	vector<ComPtr<ID3D12Resource>> backBuffer; //— •\‚Ì2‚Â‚É‚Â‚¢‚Ä
+	D3D12_COMMAND_QUEUE_DESC cmdQueueDesc;     //æ¨™æº–è¨­å®šã§ã‚³ãƒãƒ³ãƒ‰ã‚­ãƒ¥ãƒ¼ã‚’ç”Ÿæˆ
+	DXGI_SWAP_CHAIN_DESC1 swapchainDesc;       //å„ç¨®è¨­å®šã‚’ã—ã¦ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã‚’ç”Ÿæˆ
+	D3D12_DESCRIPTOR_HEAP_DESC heapDesc;       //å„ç¨®è¨­å®šã‚’ã—ã¦ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ã‚’ç”Ÿæˆ
+	vector<ComPtr<ID3D12Resource>> backBuffer; //è£è¡¨ã®2ã¤ã«ã¤ã„ã¦
 
-	// ƒtƒFƒ“ƒX‚Ì¶¬
+	// ãƒ•ã‚§ãƒ³ã‚¹ã®ç”Ÿæˆ
 	ComPtr<ID3D12Fence> fence;
 	UINT64 fenceVal;
 private:
-	CD3DX12_RESOURCE_DESC depthResDesc;     //ƒŠƒ\[ƒXİ’è
-	ComPtr<ID3D12Resource> depthBuffer;     //ƒŠƒ\[ƒX¶¬
-	D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc; //[“xƒrƒ…[—pİ’è\‘¢‘Ì
-	ComPtr<ID3D12DescriptorHeap> dsvHeap;   //[“xƒrƒ…[—pƒfƒXƒNƒŠƒvƒ^ƒq[ƒvì¬
-	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc;  //[“xƒrƒ…[ì¬
+	CD3DX12_RESOURCE_DESC depthResDesc;     //ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
+	ComPtr<ID3D12Resource> depthBuffer;     //ãƒªã‚½ãƒ¼ã‚¹ç”Ÿæˆ
+	D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc; //æ·±åº¦ãƒ“ãƒ¥ãƒ¼ç”¨è¨­å®šæ§‹é€ ä½“
+	ComPtr<ID3D12DescriptorHeap> dsvHeap;   //æ·±åº¦ãƒ“ãƒ¥ãƒ¼ç”¨ãƒ‡ã‚¹ã‚¯ãƒªãƒ—ã‚¿ãƒ’ãƒ¼ãƒ—ä½œæˆ
+	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc;  //æ·±åº¦ãƒ“ãƒ¥ãƒ¼ä½œæˆ
 
-	SIZE_T bbIndex; //ƒoƒbƒNƒoƒbƒtƒ@‚ÌƒCƒ“ƒfƒbƒNƒX
+	SIZE_T bbIndex; //ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 
-public: // ƒƒ“ƒoŠÖ”
-	// ‰Šú‰»
+public: // ãƒ¡ãƒ³ãƒé–¢æ•°
+	// åˆæœŸåŒ–
 	HRESULT Init();
 
-	// •`‰æ‘Oˆ—
+	// æç”»å‰å‡¦ç†
 	void ClearScreen();
-	// •`‰æŒãˆ—
+	// æç”»å¾Œå‡¦ç†
 	void ScreenFlip();
 
-	// ƒEƒBƒ“ƒhƒEƒTƒCƒY‚Ìİ’è
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã®è¨­å®š
 	int SetWindowSize(int width, int height);
 private:
-	// ƒfƒoƒbƒOƒŒƒCƒ„[
+	// ãƒ‡ãƒãƒƒã‚°ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	void DebugLayer();
 
-	// [“xƒoƒbƒtƒ@‚Ì¶¬
+	// æ·±åº¦ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	HRESULT CreateDepthBuffer();
 };

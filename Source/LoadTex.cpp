@@ -289,7 +289,7 @@ int LoadTex::DrawTextrue(float posX, float posY, float width, float height, floa
 
 	sprite[index.constant].matWorld = XMMatrixIdentity();
 	sprite[index.constant].matWorld *=
-		XMMatrixRotationZ(XMConvertToRadians(sprite[index.constant].rotation));
+		XMMatrixRotationZ(sprite[index.constant].rotation);
 	sprite[index.constant].matWorld *= XMMatrixTranslation(
 		sprite[index.constant].pos.x,
 		sprite[index.constant].pos.y,

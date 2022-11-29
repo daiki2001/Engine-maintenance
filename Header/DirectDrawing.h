@@ -166,12 +166,14 @@ class OBJData : public Object
 	/*配列にして使うことが前提*/
 	/*先にモデル不要のオブジェクトを生成する*/
 public:
+	std::string name;
 	Microsoft::WRL::ComPtr<ID3D12Resource> materialConstBuff; //定数バッファ
 	Material material;
 
 	// コンストラクタ
 	OBJData() : Object()
 	{
+		name = {};
 		material = {};
 	}
 	// デストラクタ
