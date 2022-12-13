@@ -29,7 +29,7 @@ int WriteFileOpen(FILE** fileHandle, const char* filePath, int flag)
 	return 0;
 }
 
-int WriteCSV(FILE* fileHandle, int numArray[], int size)
+int WriteCSV(FILE* fileHandle, int numArray[], const size_t& size)
 {
 	for (size_t i = 0; i < size; i++)
 	{

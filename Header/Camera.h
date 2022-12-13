@@ -5,7 +5,7 @@
 class Camera final
 {
 public: // シングルトン化
-	Camera* Get();
+	static Camera* Get();
 private:
 	Camera();
 	Camera(const Camera&) = delete;

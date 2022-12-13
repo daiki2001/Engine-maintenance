@@ -30,6 +30,7 @@ SceneManager::SceneManager(DrawPolygon* draw) :
 void SceneManager::Loop() const
 {
 	sceneStack.top()->Update();
+	sceneStack.top()->ChengeTitleScene(Input::IsKeyTrigger(DIK_F1));
 	BaseScene::ChangeAnimationUpdate();
 	Camera::Update();
 

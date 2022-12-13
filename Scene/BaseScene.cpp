@@ -15,3 +15,21 @@ BaseScene::~BaseScene()
 {
 	sceneChanger = nullptr;
 }
+
+void BaseScene::ChengeTitleScene(bool flag)
+{
+	if (flag)
+	{
+		isSceneDest = true;
+		nextScene = SceneChanger::Scene::Title;
+		changeAnimation.Start();
+	}
+
+	if (isSceneDest)
+	{
+		if (changeAnimation.GetChange())
+		{
+			sceneChanger->SceneChange(nextScene, true);
+		}
+	}
+}
