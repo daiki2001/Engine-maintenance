@@ -1,4 +1,4 @@
-﻿#include "./Header/Input.h"
+﻿#include "./Input/Input.h"
 
 DirectInput* Input::input = {};
 char Input::keys[256] = {};

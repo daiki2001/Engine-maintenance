@@ -1,4 +1,4 @@
-﻿#include "./Header/DirectInput.h"
+﻿#include "./Input/DirectInput.h"
 #include "./Header/Win32API.h"
 
 #include "./Header/Error.h"
@@ -144,11 +144,6 @@ bool DirectInput::CheckHitKey(int keyCode)
 
 bool DirectInput::CheckHitGamepad(GamepadInputType inputType, const DIJOYSTATE& gamepad)
 {
-	if (GamepadInputUpdate() != 0)
-	{
-		return false;
-	}
-
 	// ボタンの入力があるかどうか
 	if (inputType >= 0 && inputType <= 31)
 	{
