@@ -210,6 +210,8 @@ struct Sprite
 	// 描画範囲
 	DirectX::XMFLOAT2 texLeftTop = { 0, 0 };
 	DirectX::XMFLOAT2 texSize = { 100, 100 };
+
+	bool isTriangle = false;
 };
 
 class DirectDrawing

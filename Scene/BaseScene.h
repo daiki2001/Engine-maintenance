@@ -31,4 +31,6 @@ public: //メンバ関数
 	virtual void Init() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+
+	void ChengeTitleScene(bool flag);
 };

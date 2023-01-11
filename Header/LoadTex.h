@@ -70,6 +70,11 @@ public:
 					   int graphHandle = 0, const DirectX::XMFLOAT2& anchorpoint = { 0.5f, 0.5f },
 					   const XMFLOAT4& color = { 1, 1, 1, 1 }, int parent = -1);
 
+	// 2D三角形の描画
+	int Draw2DTriangle(float posX, float posY, float width, float height, float angle = 0,
+					   int graphHandle = 0, const DirectX::XMFLOAT2& anchorpoint = { 0.5f, 0.5f },
+					   const XMFLOAT4& color = { 1, 1, 1, 1 }, int parent = -1);
+
 	// 内部の初期化用関数
 	void LoopEnd();
 
