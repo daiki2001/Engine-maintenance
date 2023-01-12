@@ -3,7 +3,7 @@
 
 #include "./Header/Error.h"
 
-const LONG DirectInput::DEADZONE = 200;
+const LONG DirectInput::DEADZONE = 300;
 
 IDirectInput8* DirectInput::dinput = nullptr;
 IDirectInputDevice8* DirectInput::devkeyborad = nullptr;
@@ -144,6 +144,11 @@ bool DirectInput::CheckHitKey(int keyCode)
 
 bool DirectInput::CheckHitGamepad(GamepadInputType inputType, const DIJOYSTATE& gamepad)
 {
+	if (gamepad.rgdwPOV[0] == 0 && gamepad.rgdwPOV[1] == 0 && gamepad.rgdwPOV[2] == 0 && gamepad.rgdwPOV[3] == 0)
+	{
+		return false;
+	}
+
 	// ボタンの入力があるかどうか
 	if (inputType >= 0 && inputType <= 31)
 	{
@@ -279,6 +284,7 @@ int DirectInput::GetGamepadStateAll(DIJOYSTATE* gamepadState, const size_t& game
 {
 	if (gamepadNo >= gamepads.size())
 	{
+		//gamepadState = nullptr;
 		return Engine::FUNCTION_ERROR;
 	}
 
@@ -342,7 +348,7 @@ int DirectInput::GamepadInputUpdate(const size_t& gamepadNo)
 		return Engine::FUNCTION_ERROR;
 	}
 
-	for (size_t i = gamepads.size(); i <= devgamepad.size(); i++)
+	for (size_t i = gamepads.size(); i < devgamepad.size(); i++)
 	{
 		gamepads.push_back({});
 	}

@@ -32,6 +32,21 @@ constexpr void Swap(T* a, T* b)
 }
 
 template <class T>
+constexpr T Clamp(const T& value, const T& max, const T& min)
+{
+	if (value >= max)
+	{
+		return max;
+	}
+	if (value <= min)
+	{
+		return min;
+	}
+
+	return value;
+}
+
+template <class T>
 void ContainerClear(T& std)
 {
 	std.clear();
