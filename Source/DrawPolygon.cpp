@@ -272,7 +272,7 @@ int DrawPolygon::CreateCylinder(float r, float h, const size_t& divNum, bool isF
 	size_t indexSize = divNum * (2 + (size_t)isFill);
 	unsigned short* index = (unsigned short*)malloc(sizeof(unsigned short) * indexSize);
 
-	Circle({ 0, 0, -h /*/ 2.0f*/ }, r, divNum, isFill, v, index);
+	Circle({ 0, 0, -h }, r, divNum, isFill, v, index);
 
 	for (size_t i = 0; i < divNum + 1; i++)
 	{
