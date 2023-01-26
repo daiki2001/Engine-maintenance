@@ -1,6 +1,5 @@
 ﻿#pragma once
-#include "DirectInput.h"
-#include "Win32API.h"
+#include "./Input/DirectInput.h"
 
 class Input final
 {

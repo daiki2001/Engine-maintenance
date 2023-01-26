@@ -107,13 +107,11 @@
     <ClInclude Include="Header\Camera.h" />
     <ClInclude Include="Header\DebugText.h" />
     <ClInclude Include="Header\DirectDrawing.h" />
-    <ClInclude Include="Header\DirectInput.h" />
     <ClInclude Include="Header\DirectXInit.h" />
     <ClInclude Include="Header\DrawPolygon.h" />
     <ClInclude Include="Header\EngineGeneral.h" />
     <ClInclude Include="Header\Error.h" />
     <ClInclude Include="Header\FbxLoader.h" />
-    <ClInclude Include="Header\Input.h" />
     <ClInclude Include="Header\LoadTex.h" />
     <ClInclude Include="Header\Model.h" />
     <ClInclude Include="Header\Parameter.h" />
@@ -121,6 +119,9 @@
     <ClInclude Include="Header\RenderTexture.h" />
     <ClInclude Include="Header\SafeDelete.h" />
     <ClInclude Include="Header\Win32API.h" />
+    <ClInclude Include="Input\DirectInput.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\GameInput.h" />
     <ClInclude Include="Math\Collision\BaseCollider.h" />
     <ClInclude Include="Math\Collision\Collision.h" />
     <ClInclude Include="Math\Collision\CollisionInfo.h" />
@@ -145,6 +146,9 @@
   <ItemGroup>
     <ClCompile Include="File\LoadFile.cpp" />
     <ClCompile Include="File\WriteFile.cpp" />
+    <ClCompile Include="Input\DirectInput.cpp" />
+    <ClCompile Include="Input\Input.cpp" />
+    <ClCompile Include="Input\GameInput.cpp" />
     <ClCompile Include="Math\Collision\Collision.cpp" />
     <ClCompile Include="Math\Collision\CollisionManager.cpp" />
     <ClCompile Include="Math\Collision\CollisionPrimitive.cpp" />
@@ -165,12 +169,10 @@
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\DebugText.cpp" />
     <ClCompile Include="Source\DirectDrawing.cpp" />
-    <ClCompile Include="Source\DirectInput.cpp" />
     <ClCompile Include="Source\DirectXInit.cpp" />
     <ClCompile Include="Source\DrawPolygon.cpp" />
     <ClCompile Include="Source\EngineGeneral.cpp" />
     <ClCompile Include="Source\FbxLoader.cpp" />
-    <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\LoadTex.cpp" />
     <ClCompile Include="Source\Model.cpp" />
     <ClCompile Include="Source\Parameter.cpp" />

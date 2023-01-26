@@ -252,10 +252,12 @@ int LoadTex::DrawTextrue(float posX, float posY, float width, float height, floa
 	if (sprite[index.constant].size.x != width ||
 		sprite[index.constant].size.y != height ||
 		sprite[index.constant].anchorpoint.x != anchorpoint.x ||
-		sprite[index.constant].anchorpoint.y != anchorpoint.y)
+		sprite[index.constant].anchorpoint.y != anchorpoint.y ||
+		sprite[index.constant].isTriangle == true)
 	{
 		sprite[index.constant].size = { width, height };
 		sprite[index.constant].anchorpoint = anchorpoint;
+		sprite[index.constant].isTriangle = false;
 
 		enum Corner { LB, LT, RB, RT };
 
@@ -287,13 +289,9 @@ int LoadTex::DrawTextrue(float posX, float posY, float width, float height, floa
 	sprite[index.constant].pos = { posX, posY, 0 };
 	sprite[index.constant].rotation = angle;
 
-	sprite[index.constant].matWorld = XMMatrixIdentity();
-	sprite[index.constant].matWorld *=
-		XMMatrixRotationZ(sprite[index.constant].rotation);
-	sprite[index.constant].matWorld *= XMMatrixTranslation(
-		sprite[index.constant].pos.x,
-		sprite[index.constant].pos.y,
-		sprite[index.constant].pos.z);
+	sprite[index.constant].matWorld = Math::Identity();
+	sprite[index.constant].matWorld *= Math::rotateZ(sprite[index.constant].rotation);
+	sprite[index.constant].matWorld *= Math::translate(sprite[index.constant].pos);
 
 	if (parent != -1)
 	{
@@ -323,7 +321,7 @@ int LoadTex::DrawTextrue(float posX, float posY, float width, float height, floa
 	// 描画コマンド
 	cmdList->DrawInstanced(4, 1, 0, 0);
 
-#pragma endregion
+#pragma endregion //GraphicsCommand
 
 	return index.constant;
 }
@@ -382,12 +380,14 @@ int LoadTex::DrawCutTextrue(float posX, float posY, float width, float height,
 		sprite[index.constant].texSize.x != texSize.x ||
 		sprite[index.constant].texSize.y != texSize.y ||
 		sprite[index.constant].anchorpoint.x != anchorpoint.x ||
-		sprite[index.constant].anchorpoint.y != anchorpoint.y)
+		sprite[index.constant].anchorpoint.y != anchorpoint.y ||
+		sprite[index.constant].isTriangle == true)
 	{
 		sprite[index.constant].size = { width, height };
 		sprite[index.constant].texLeftTop = texPos;
 		sprite[index.constant].texSize = texSize;
 		sprite[index.constant].anchorpoint = anchorpoint;
+		sprite[index.constant].isTriangle = false;
 
 		enum Corner { LB, LT, RB, RT };
 
@@ -432,14 +432,9 @@ int LoadTex::DrawCutTextrue(float posX, float posY, float width, float height,
 	sprite[index.constant].pos = { posX, posY, 0 };
 	sprite[index.constant].rotation = angle;
 
-	sprite[index.constant].matWorld = XMMatrixIdentity();
-	sprite[index.constant].matWorld *=
-		XMMatrixRotationZ(XMConvertToRadians(sprite[index.constant].rotation));
-	sprite[index.constant].matWorld *=
-		XMMatrixTranslation(
-			sprite[index.constant].pos.x,
-			sprite[index.constant].pos.y,
-			sprite[index.constant].pos.z);
+	sprite[index.constant].matWorld = Math::Identity();
+	sprite[index.constant].matWorld *= Math::rotateZ(sprite[index.constant].rotation);
+	sprite[index.constant].matWorld *= Math::translate(sprite[index.constant].pos);
 
 	if (parent != -1)
 	{
@@ -466,7 +461,128 @@ int LoadTex::DrawCutTextrue(float posX, float posY, float width, float height,
 	// 描画コマンド
 	cmdList->DrawInstanced(4, 1, 0, 0);
 
-#pragma endregion
+#pragma endregion //GraphicsCommand
+
+	return index.constant;
+}
+
+int LoadTex::Draw2DTriangle(float posX, float posY, float width, float height, float angle, int graphHandle, const DirectX::XMFLOAT2& anchorpoint, const XMFLOAT4& color, int parent)
+{
+	using namespace DirectX;
+	using namespace Engine;
+
+	if ((graphHandle < 0 || (UINT)graphHandle > textrueCount) ||
+		(parent < -1 || (parent != -1 && (size_t)parent >= spriteIndex.size())))
+	{
+		return FUNCTION_ERROR;
+	}
+
+	static auto* cmdList = DirectXInit::GetCommandList();
+	bool isInit = false;
+
+	if ((size_t)(spriteCount + 1) < spriteIndex.size())
+	{
+		isInit = true;
+	}
+
+	if (isInit == false)
+	{
+		int size = DrawTextureInit();
+		if (size == FUNCTION_ERROR)
+		{
+			return FUNCTION_ERROR;
+		}
+
+		spriteIndex.emplace_back(IndexData{ size, graphHandle });
+	}
+
+	if (spriteIndex.size() == 0)
+	{
+		return FUNCTION_ERROR;
+	}
+
+	spriteCount++;
+	spriteCount %= spriteIndex.size();
+
+#pragma region GraphicsCommand
+
+	BaseDrawSpriteGraphics();
+
+	IndexData& index = spriteIndex[spriteCount];
+	index.textrue = graphHandle;
+
+	if (sprite[index.constant].size.x != width ||
+		sprite[index.constant].size.y != height ||
+		sprite[index.constant].anchorpoint.x != anchorpoint.x ||
+		sprite[index.constant].anchorpoint.y != anchorpoint.y ||
+		sprite[index.constant].isTriangle == false)
+	{
+		sprite[index.constant].size = { width, height };
+		sprite[index.constant].anchorpoint = anchorpoint;
+		sprite[index.constant].isTriangle = true;
+
+		enum Corner { LEFT, TOP, BOTTOM };
+
+		SpriteVertex vert[] = {
+			{{}, { 0.0f, 0.5f }},
+			{{}, { 1.0f, 0.0f }},
+			{{}, { 1.0f, 1.0f }},
+		};
+
+		float left = (0.0f - sprite[index.constant].anchorpoint.x) * sprite[index.constant].size.x;
+		float centerX = (0.5f - sprite[index.constant].anchorpoint.x) * sprite[index.constant].size.x;
+		float right = (1.0f - sprite[index.constant].anchorpoint.x) * sprite[index.constant].size.x;
+		float top = (0.0f - sprite[index.constant].anchorpoint.y) * sprite[index.constant].size.y;
+		float bottom = (1.0f - sprite[index.constant].anchorpoint.y) * sprite[index.constant].size.y;
+
+		vert[LEFT].pos = { left, centerX, 0.0f };
+		vert[TOP].pos = { right, top, 0.0f };
+		vert[BOTTOM].pos = { right, bottom, 0.0f };
+
+		// 頂点バッファへのデータ転送
+		SpriteVertex* vertexMap = nullptr;
+		sprite[index.constant].vertBuff->Map(0, nullptr, (void**)&vertexMap);
+		memcpy(vertexMap, vert, sizeof(vert));
+		sprite[index.constant].vertBuff->Unmap(0, nullptr);
+	}
+
+	sprite[index.constant].color = color;
+	sprite[index.constant].pos = { posX, posY, 0 };
+	sprite[index.constant].rotation = angle;
+
+	sprite[index.constant].matWorld = Math::Identity();
+	sprite[index.constant].matWorld *= Math::rotateZ(sprite[index.constant].rotation);
+	sprite[index.constant].matWorld *= Math::translate(sprite[index.constant].pos);
+
+	if (parent != -1)
+	{
+		sprite[index.constant].matWorld *= sprite[parent].matWorld;
+	}
+
+	SpriteConstBufferData* constMap = nullptr;
+	HRESULT hr = sprite[index.constant].constBuff->Map(0, nullptr, (void**)&constMap);
+	if (SUCCEEDED(hr))
+	{
+		constMap->color = sprite[index.constant].color;
+		constMap->mat = sprite[index.constant].matWorld *
+			Camera::matProjection[Camera::Projection::ORTHOGRAPHIC];
+		sprite[index.constant].constBuff->Unmap(0, nullptr);
+	}
+
+	// デスクリプタヒープをセット
+	ID3D12DescriptorHeap* ppHeaps[] = { texCommonData.descHeap.Get() };
+	cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+
+	// 定数バッファビューをセット
+	cmdList->SetGraphicsRootConstantBufferView(0, sprite[index.constant].constBuff->GetGPUVirtualAddress());
+	cmdList->SetGraphicsRootDescriptorTable(1, textrueData[index.textrue].gpuDescHandle);
+
+	// 頂点バッファの設定
+	cmdList->IASetVertexBuffers(0, 1, &sprite[index.constant].vbView);
+	// 描画コマンド
+	cmdList->DrawInstanced(3, 1, 0, 0);
+
+#pragma endregion //GraphicsCommand
 
 	return index.constant;
 }

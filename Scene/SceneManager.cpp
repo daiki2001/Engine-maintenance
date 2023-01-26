@@ -1,6 +1,7 @@
 ﻿#include "SceneManager.h"
-#include "./Header/Camera.h"
 #include "./Header/DirectXInit.h"
+#include "./Header/Camera.h"
+#include "./Input/Input.h"
 
 #include "EngineTestScene.h"
 #include "../Scene/TitleScene.h"

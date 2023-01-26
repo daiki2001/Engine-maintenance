@@ -86,6 +86,8 @@ public: // メンバ関数
 private:
 	// デバッグレイヤー
 	void DebugLayer();
+	// DX12でエラーが出た時に止める関数
+	void InfoQueue();
 
 	// 深度バッファの生成
 	HRESULT CreateDepthBuffer();
