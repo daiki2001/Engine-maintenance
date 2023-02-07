@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <DirectXMath.h>
+#include <cmath>
 
 // インクルードファイル
 #include "./Math/Vector3.h"
@@ -35,11 +36,45 @@ bool operator!=(const DirectX::XMFLOAT2& a, const DirectX::XMFLOAT2& b);
 bool operator==(const DirectX::XMFLOAT4& a, const DirectX::XMFLOAT4& b);
 // XMFLOAT4の!=演算子
 bool operator!=(const DirectX::XMFLOAT4& a, const DirectX::XMFLOAT4& b);
+} //Math
+} //Engine
 
-template <class T>
-T LockRatio(float x)
+/*テンプレート関数*/
+namespace Engine
 {
-	return T();
+namespace Math
+{
+// 符号関数
+template <class T>
+T Sign(const T& x)
+{
+	if (x > 0)
+	{
+		return static_cast<T>(+1);
+	}
+	if (x < 0)
+	{
+		return static_cast<T>(-1);
+	}
+	return static_cast<T>(0);
+}
+
+// 四捨五入
+// 33.3→33.0にしたい場合、multiplierに-1を指定してください
+template <class T>
+T RoundOff(const T& x, int multiplier = -1)
+{
+	if (x == static_cast<T>(0))
+	{
+		return x;
+	}
+
+	double multi = (static_cast<double>(multiplier) * (-1.0)) - 1.0;
+	T y = x * std::pow(10, multi);
+	y = std::round(y);
+	y /= std::pow(10, multi);
+
+	return y;
 }
 } //Math
 } //Engine
