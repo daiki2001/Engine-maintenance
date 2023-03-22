@@ -20,6 +20,11 @@ Vector3::Vector3(const XMFLOAT3& v) :
 {
 }
 
+Vector3::Vector3(const DirectX::XMFLOAT2& xy, float z) :
+	DirectX::XMFLOAT3(xy.x, xy.y, z)
+{
+}
+
 float Vector3::Length() const
 {
 	return sqrtf(LengthSquared());

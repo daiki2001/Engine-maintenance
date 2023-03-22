@@ -22,7 +22,7 @@ Object::Object() :
 	position(0.0f, 0.0f, 0.0f),
 	rotation(DirectX::XMMatrixIdentity()),
 	scale(1.0f, 1.0f, 1.0f),
-	color(1.0f, 1.0f, 1.0f, 1.0f),
+	color(Color::AddAlphaValue(Color::WHITE, 1.0f)),
 	matWorld(DirectX::XMMatrixIdentity()),
 	parent(nullptr),
 	name(nullptr),
@@ -508,8 +508,7 @@ void DirectDrawing::UpdataConstant(
 	Object* parent)
 {
 	if ((objectIndex < 0 || static_cast<size_t>(objectIndex) >= obj.size()) ||
-		(polygonData < -1 || (polygonData != -1 && static_cast<size_t>(polygonData) >= vertices.size()))/* ||
-		(parent < -1 || (parent != -1 && static_cast<size_t>(parent) >= obj.size()))*/)
+		(polygonData < -1 || (polygonData != -1 && static_cast<size_t>(polygonData) >= vertices.size())))
 	{
 		return;
 	}
@@ -655,15 +654,9 @@ int DirectDrawing::CreateSprite()
 	// 定数バッファにデータ転送
 	SpriteConstBufferData* constMap = nullptr;
 	hr = sprite[sprite.size() - 1].constBuff->Map(0, nullptr, (void**)&constMap);
-	constMap->color = XMFLOAT4(1, 1, 1, 1); //色指定(RGBA)
+	constMap->color = Color::AddAlphaValue(Color::WHITE, 1.0f); //色指定(RGBA)
 	constMap->mat = Camera::matProjection[Camera::Projection::ORTHOGRAPHIC]; //平行投影行列
 	sprite[sprite.size() - 1].constBuff->Unmap(0, nullptr);
-
-	//hr = BasicDescHeapInit();
-	//if (FAILED(hr))
-	//{
-	//	return Engine::FUNCTION_ERROR;
-	//}
 
 	return static_cast<int>(sprite.size() - 1);
 }

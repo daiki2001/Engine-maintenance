@@ -442,7 +442,7 @@ HRESULT Model::CreateConstBuffer()
 			constMap->viewProj = Math::Identity();
 			constMap->world = Math::Identity();
 			constMap->cameraPos = Math::Vector3();
-			constMap->color = { 1.0f, 1.0f, 1.0f, 1.0f };
+			constMap->color = Color::AddAlphaValue(Color::WHITE, 1.0f);
 		}
 		constBuff->Unmap(0, nullptr);
 	}

@@ -140,7 +140,7 @@ public: // メンバ関数
 	// 初期化
 	void Init();
 	// 更新処理
-	int Update(const DirectX::XMFLOAT4& color = { 1.0f, 1.0f, 1.0f, 1.0f });
+	int Update(const DirectX::XMFLOAT4& color = Color::AddAlphaValue(Color::WHITE, 1.0f));
 	// 描画
 	void Draw();
 	// 終了処理

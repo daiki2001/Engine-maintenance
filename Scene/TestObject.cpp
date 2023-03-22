@@ -1,6 +1,7 @@
 #include "TestObject.h"
 #include "./Header/Camera.h"
 #include "./Header/SafeDelete.h"
+#include "./Header/Color.h"
 #include "./Header/Error.h"
 
 const float TestObject::sphereRadius = 3.0f;
@@ -80,5 +81,5 @@ int TestObject::CreateModel(const char* filePath, const char* directoryPath)
 
 void TestObject::OnCollision(const CollisionInfo& info)
 {
-	draw->DrawString(0.0f, 0.0f, 1.0f, DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), "Hit");
+	draw->DrawString(0.0f, 0.0f, 1.0f, Color::AddAlphaValue(Color::WHITE, 1.0f), "Hit");
 }

@@ -199,7 +199,7 @@ struct Sprite
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuff; //定数バッファ
 
 	Math::Matrix4 matWorld = DirectX::XMMatrixIdentity(); //ワールド行列
-	DirectX::XMFLOAT4 color = { 1, 1, 1, 1 }; //色 (RGBA)
+	DirectX::XMFLOAT4 color = Color::AddAlphaValue(Color::WHITE, 1.0f); //色 (RGBA)
 
 	Math::Vector3 pos = { 0, 0, 0 }; //座標
 	float rotation = 0.0f; //回転角

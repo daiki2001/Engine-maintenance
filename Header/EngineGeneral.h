@@ -2,6 +2,7 @@
 #include "./Math/EngineMath.h"
 #include "./File/LoadFile.h"
 #include "./File/WriteFile.h"
+#include "Color.h"
 #include "Error.h"
 
 /*定数*/
@@ -32,18 +33,21 @@ constexpr void Swap(T* a, T* b)
 }
 
 template <class T>
-constexpr T Clamp(const T& value, const T& max, const T& min)
+constexpr T Max(const T& value, const T& high)
 {
-	if (value >= max)
-	{
-		return max;
-	}
-	if (value <= min)
-	{
-		return min;
-	}
+	return (value > high) ? high : value;
+}
 
-	return value;
+template <class T>
+constexpr T Min(const T& value, const T& low)
+{
+	return (value < low) ? low : value;
+}
+
+template <class T>
+constexpr T Clamp(const T& value, const T& high, const T& low)
+{
+	return Max(Min(value, low), high);
 }
 
 template <class T>

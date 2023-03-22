@@ -201,7 +201,7 @@ HRESULT DebugText::DrawString(float posX, float posY, float fontScale, const XMF
 		sprite[fontIndex[charCount]].texSize = { fontWidth, fontHeight };
 
 		DrawTextrue(posX + fontWidth * fontScale * i + pixel.x, posY + pixel.y, fontWidth * fontScale, fontHeight * fontScale,
-					0.0f, Parameter::Get("white1x1"), DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT4(0.0f, 0.0f, 0.0f, 0.5f));
+					0.0f, Parameter::Get("white1x1"), DirectX::XMFLOAT2(0.0f, 0.0f), Color::AddAlphaValue(Color::BLACK, 0.5f));
 
 		enum Corner { LB, LT, RB, RT };
 

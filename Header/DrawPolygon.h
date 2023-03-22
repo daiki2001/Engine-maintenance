@@ -3,8 +3,6 @@
 #include <d3dx12.h>
 #include "./Header/Camera.h"
 
-#define scale_xyz(_scale) DirectX::XMFLOAT3(_scale, _scale, _scale)
-
 class DrawPolygon final : public DebugText
 {
 public: // メンバ変数
@@ -68,7 +66,7 @@ public: // メンバ関数
 
 	// モデルの描画処理
 	int DrawOBJ(int object, const Vector3& position, const Matrix4& rotation, const Vector3& scale,
-				const XMFLOAT4& color = { 1.0f, 1.0f, 1.0f, 1.0f },
+				const XMFLOAT4& color = Color::AddAlphaValue(Color::WHITE, 1.0f),
 				bool isOrthoGraphic = false, bool viewMultiFlag = true, Object* parent = nullptr);
 
 	// カメラの作成

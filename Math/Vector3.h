@@ -11,10 +11,15 @@ public:
 	// コンストラクタ
 	Vector3();                          //零ベクトルとして生成
 	Vector3(float x, float y, float z); //x成分、y成分、z成分を指定して生成
-	Vector3(const XMFLOAT3& v);         //DirectX::XMFLOAT3と互換性を持たせるため
+
+	// 型変換関数
+	Vector3(const XMFLOAT3& v);                           //DirectX::XMFLOAT3からVector3への変換関数
+	Vector3(const DirectX::XMFLOAT2& xy, float z = 0.0f); //DirectX::XMFLOAT2からVector3への変換関数
 
 	// 静的メンバ関数
 	static Vector3 Zero() { return { 0.0f, 0.0f, 0.0f }; }
+	// スケール値をxyzに一括代入
+	static Vector3 Scale_xyz(float s) { return { s, s, s }; }
 
 	// メンバ関数
 	float Length() const;                  //ノルム(長さ)を求める

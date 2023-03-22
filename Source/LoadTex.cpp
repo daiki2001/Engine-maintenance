@@ -15,7 +15,7 @@ TextrueCommon::TextrueCommon() :
 	img{},
 	descHeap{}
 {
-	noneTextrue[0] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	noneTextrue[0] = Color::AddAlphaValue(Color::WHITE, 1.0f);
 }
 
 UINT LoadTex::textrueCount = 0;
@@ -466,7 +466,8 @@ int LoadTex::DrawCutTextrue(float posX, float posY, float width, float height,
 	return index.constant;
 }
 
-int LoadTex::Draw2DTriangle(float posX, float posY, float width, float height, float angle, int graphHandle, const DirectX::XMFLOAT2& anchorpoint, const XMFLOAT4& color, int parent)
+int LoadTex::Draw2DTriangle(float posX, float posY, float width, float height, float angle, int graphHandle,
+							const DirectX::XMFLOAT2& anchorpoint, const XMFLOAT4& color, int parent)
 {
 	using namespace DirectX;
 	using namespace Engine;

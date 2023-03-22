@@ -7,8 +7,6 @@ namespace Math
 // 線形補間
 const Vector3 Lerp(const Vector3& start, const Vector3& end, float t)
 {
-	// float y = t;
-	// return start * (1.0f - y) + end * y;
 	return start * (1.0f - t) + end * t;
 }
 

@@ -70,9 +70,9 @@ T RoundOff(const T& x, int multiplier = -1)
 	}
 
 	double multi = (static_cast<double>(multiplier) * (-1.0)) - 1.0;
-	T y = x * std::pow(10, multi);
+	T y = x * static_cast<T>(std::pow(10, multi));
 	y = std::round(y);
-	y /= std::pow(10, multi);
+	y /= static_cast<T>(std::pow(10, multi));
 
 	return y;
 }

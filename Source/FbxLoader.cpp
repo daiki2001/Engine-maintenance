@@ -43,7 +43,6 @@ Engine::Math::Matrix4 FbxLoader::ConvertMatrixFromFbx(const FbxAMatrix& src)
 void FbxLoader::Init()
 {
 	// 再初期化チェック
-	//assert(fbxManger == nullptr);
 	ErrorLog("fbxMangerを再初期化しようとしています。\n", fbxManger != nullptr);
 
 	device = DirectXInit::GetDevice();
