@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "DirectDrawing.h"
 #include <DirectXTex.h>
+#include "PostEffect.h"
 #include <d3dx12.h>
 #include <string>
 
@@ -15,16 +16,6 @@ struct TextrueCommon
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeap; //srv専用のディスクリプタヒープ
 
 	TextrueCommon();
-};
-
-// テクスチャ一枚分のデータをまとめた構造体
-struct Textrue
-{
-	std::wstring name;
-	Microsoft::WRL::ComPtr<ID3D12Resource> texbuff; //テクスチャバッファ
-
-	CD3DX12_CPU_DESCRIPTOR_HANDLE cpuDescHandle; //CPU側のハンドル
-	CD3DX12_GPU_DESCRIPTOR_HANDLE gpuDescHandle; //GPU側のハンドル
 };
 
 class LoadTex : public DirectDrawing

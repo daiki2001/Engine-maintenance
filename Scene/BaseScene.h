@@ -12,7 +12,7 @@ protected: //静的メンバ変数
 public: //静的メンバ関数
 	static void StaticInit(DrawPolygon* draw) {
 		BaseScene::draw = draw;
-		SceneChangeAnimation::StaticInit(BaseScene::draw);
+		SceneChangeAnimation::StaticInit(draw);
 	}
 	static void ChangeAnimationUpdate() { changeAnimation.Update(); }
 	static void ChangeAnimationDraw() { changeAnimation.Draw(); }
@@ -31,6 +31,8 @@ public: //メンバ関数
 	virtual void Init() = 0;
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
+	virtual void BGDraw() {} //背景描画
+	virtual void UIDraw() {} //UI描画
 
 	void ChengeTitleScene(bool flag);
 };

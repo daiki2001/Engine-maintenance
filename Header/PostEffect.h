@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "RenderTexture.h"
 #include "./Header/EngineGeneral.h"
 #include <d3d12.h>
 #include <wrl.h>
@@ -29,7 +30,7 @@ private:
 	D3D12_VERTEX_BUFFER_VIEW vbView;  //頂点バッファビュー
 	ComPtr<ID3D12Resource> constBuff; //定数バッファ
 
-	std::vector<ComPtr<ID3D12Resource>> texBuff; //テクスチャバッファ
+	std::vector<Textrue> texBuff; //テクスチャバッファ
 	ComPtr<ID3D12DescriptorHeap> descHeapSRV;    //SRV用のデスクリプタヒープ
 
 	ComPtr<ID3D12DescriptorHeap> descHeapRTV; //RTV用のデスクリプタヒープ

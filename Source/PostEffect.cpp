@@ -1,7 +1,6 @@
 ﻿#include "./Header/PostEffect.h"
 #include "./Header/DirectXInit.h"
 #include "./Header/DirectDrawing.h"
-#include "./Header/RenderTexture.h"
 #include "./ShaderMgr/ShaderManager.h"
 
 namespace
@@ -158,20 +157,8 @@ int PostEffect::Draw()
 
 	// 定数バッファビューをセット
 	cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
-	cmdList->SetGraphicsRootDescriptorTable(
-		1,
-		CD3DX12_GPU_DESCRIPTOR_HANDLE(
-			descHeapSRV->GetGPUDescriptorHandleForHeapStart(),
-			0,
-			dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)
-		));
-	cmdList->SetGraphicsRootDescriptorTable(
-		2,
-		CD3DX12_GPU_DESCRIPTOR_HANDLE(
-			descHeapSRV->GetGPUDescriptorHandleForHeapStart(),
-			1,
-			dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)
-		));
+	cmdList->SetGraphicsRootDescriptorTable(1, texBuff[0].gpuDescHandle);
+	//cmdList->SetGraphicsRootDescriptorTable(2, texBuff[1].gpuDescHandle);
 
 	// 頂点バッファの設定
 	cmdList->IASetVertexBuffers(0, 1, &vbView);
@@ -193,7 +180,7 @@ int PostEffect::PreDraw()
 	for (size_t i = 0; i < texBuff.size(); i++)
 	{
 		cmdList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(
-			texBuff[i].Get(),
+			texBuff[i].texbuff.Get(),
 			D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
 			D3D12_RESOURCE_STATE_RENDER_TARGET
 		));
@@ -260,7 +247,7 @@ int PostEffect::PostDraw()
 	for (size_t i = 0; i < texBuff.size(); i++)
 	{
 		cmdList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(
-			texBuff[i].Get(),
+			texBuff[i].texbuff.Get(),
 			D3D12_RESOURCE_STATE_RENDER_TARGET,
 			D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE
 		));

@@ -1,5 +1,4 @@
 #include "./Header/RenderTexture.h"
-#include <d3dx12.h>
 #include "./Header/DirectXInit.h"
 #include <cassert>
 
@@ -19,7 +18,7 @@ RenderTexture* RenderTexture::Get()
 	return &instance;
 }
 
-HRESULT RenderTexture::CreateRenderTexture(vector<ComPtr<ID3D12Resource>>* const texBuff,
+HRESULT RenderTexture::CreateRenderTexture(vector<Textrue>* const texBuff,
 										   ComPtr<ID3D12DescriptorHeap>* descHeapSRV, const UINT& texCount)
 {
 	HRESULT hr = S_FALSE;
@@ -50,7 +49,7 @@ HRESULT RenderTexture::CreateRenderTexture(vector<ComPtr<ID3D12Resource>>* const
 			&texResDesc,
 			D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, //テクスチャ用指定
 			&CD3DX12_CLEAR_VALUE(DXGI_FORMAT_R8G8B8A8_UNORM, clearColor),
-			IID_PPV_ARGS(&(*texBuff)[i])
+			IID_PPV_ARGS(&(*texBuff)[i].texbuff)
 		);
 		if (FAILED(hr))
 		{
@@ -72,7 +71,8 @@ HRESULT RenderTexture::CreateRenderTexture(vector<ComPtr<ID3D12Resource>>* const
 				img[j] = 0xFF0000FF;
 			}
 
-			hr = (*texBuff)[i]->WriteToSubresource(0, nullptr, img, rowPitch, depthPitch);
+			(*texBuff)[i].name = std::to_wstring(i);
+			hr = (*texBuff)[i].texbuff->WriteToSubresource(0, nullptr, img, rowPitch, depthPitch);
 			if (FAILED(hr))
 			{
 				assert(0);
@@ -104,22 +104,33 @@ HRESULT RenderTexture::CreateRenderTexture(vector<ComPtr<ID3D12Resource>>* const
 
 	for (int i = 0; i < static_cast<int>(texCount); i++)
 	{
-		// デスクリプタヒープにSRV作成
-		dev->CreateShaderResourceView(
-			(*texBuff)[i].Get(),
-			&srvDesc,
+		// デスクリプタヒープの先頭ハンドル(CPU)を取得
+		(*texBuff)[i].cpuDescHandle =
 			CD3DX12_CPU_DESCRIPTOR_HANDLE(
 				(*descHeapSRV)->GetCPUDescriptorHandleForHeapStart(),
 				i,
+				dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV));
+
+		// デスクリプタヒープの先頭ハンドル(GPU)を取得
+		(*texBuff)[i].gpuDescHandle =
+			CD3DX12_GPU_DESCRIPTOR_HANDLE(
+				(*descHeapSRV)->GetGPUDescriptorHandleForHeapStart(),
+				i,
 				dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)
-			));
+			);
+
+		// デスクリプタヒープにSRV作成
+		dev->CreateShaderResourceView(
+			(*texBuff)[i].texbuff.Get(),
+			&srvDesc,
+			(*texBuff)[i].cpuDescHandle);
 	}
 
 	return hr;
 }
 
 HRESULT RenderTexture::CreateRTV(ComPtr<ID3D12DescriptorHeap>* descHeapRTV,
-								 const vector<ComPtr<ID3D12Resource>>& texBuff)
+								 const vector<Textrue>& texBuff)
 {
 	HRESULT hr = S_FALSE;
 	auto dev = DirectXInit::GetDevice();
@@ -139,7 +150,7 @@ HRESULT RenderTexture::CreateRTV(ComPtr<ID3D12DescriptorHeap>* descHeapRTV,
 	{
 		// レンダーターゲットビューの生成
 		dev->CreateRenderTargetView(
-			texBuff[i].Get(),
+			texBuff[i].texbuff.Get(),
 			nullptr,
 			CD3DX12_CPU_DESCRIPTOR_HANDLE(
 				(*descHeapRTV)->GetCPUDescriptorHandleForHeapStart(),
