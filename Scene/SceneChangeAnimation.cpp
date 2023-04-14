@@ -1,11 +1,10 @@
 ﻿#include "SceneChangeAnimation.h"
 #include "./Header/DirectXInit.h"
+#include "./Header/DrawPolygon.h"
 #include "./Header/EngineGeneral.h"
 #include "./Header/Parameter.h"
 
-DrawPolygon* SceneChangeAnimation::draw = nullptr;
-
-SceneChangeAnimation::SceneChangeAnimation(DrawPolygon* draw) :
+SceneChangeAnimation::SceneChangeAnimation() :
 	isAnimation(false),
 	isChange(false),
 	radius(1),
@@ -14,8 +13,6 @@ SceneChangeAnimation::SceneChangeAnimation(DrawPolygon* draw) :
 	circle(FUNCTION_ERROR),
 	sound(FUNCTION_ERROR)
 {
-	if (draw == nullptr) return;
-
 	Init();
 }
 
@@ -63,8 +60,10 @@ void SceneChangeAnimation::Update()
 
 void SceneChangeAnimation::Draw()
 {
-	static const int winW = DirectXInit::GetInstance()->windowWidth;
-	static const int winH = DirectXInit::GetInstance()->windowHeight;
+	auto w = DirectXInit::GetInstance();
+	const int winW = w->windowWidth;
+	const int winH = w->windowHeight;
+	auto draw = Library::DrawPolygon::GetInstance();
 
 	if (isAnimation)
 	{

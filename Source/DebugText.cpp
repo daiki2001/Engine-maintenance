@@ -69,7 +69,8 @@ HRESULT DebugText::DrawStringInit()
 	return S_OK;
 }
 
-HRESULT DebugText::DrawString(float posX, float posY, float fontScale, const XMFLOAT4& color,
+HRESULT DebugText::DrawString(float posX, float posY, float fontScale,
+							  const XMFLOAT4& color1, const XMFLOAT4& color2,
 							  const char* text, ...)
 {
 	using namespace DirectX;
@@ -201,7 +202,7 @@ HRESULT DebugText::DrawString(float posX, float posY, float fontScale, const XMF
 		sprite[fontIndex[charCount]].texSize = { fontWidth, fontHeight };
 
 		DrawTextrue(posX + fontWidth * fontScale * i + pixel.x, posY + pixel.y, fontWidth * fontScale, fontHeight * fontScale,
-					0.0f, Parameter::Get("white1x1"), DirectX::XMFLOAT2(0.0f, 0.0f), Color::AddAlphaValue(Color::BLACK, 0.5f));
+					0.0f, Parameter::Get("white1x1"), DirectX::XMFLOAT2(0.0f, 0.0f), color2);
 
 		enum Corner { LB, LT, RB, RT };
 
@@ -237,7 +238,7 @@ HRESULT DebugText::DrawString(float posX, float posY, float fontScale, const XMF
 		memcpy(vertexMap, vert, sizeof(vert));
 		sprite[fontIndex[charCount]].vertBuff->Unmap(0, nullptr);
 
-		sprite[fontIndex[charCount]].color = color;
+		sprite[fontIndex[charCount]].color = color1;
 		sprite[fontIndex[charCount]].pos = { posX + fontWidth * fontScale * i + pixel.x, posY + pixel.y, 0 };
 		sprite[fontIndex[charCount]].rotation = 0;
 

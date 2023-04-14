@@ -1,8 +1,7 @@
 ﻿#include "BaseScene.h"
 #include "./Header/DirectXInit.h"
 
-DrawPolygon* BaseScene::draw = nullptr;
-SceneChangeAnimation BaseScene::changeAnimation = nullptr;
+SceneChangeAnimation BaseScene::changeAnimation{};
 
 BaseScene::BaseScene(SceneChanger* sceneChanger) :
 	sceneChanger(sceneChanger),

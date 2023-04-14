@@ -1,7 +1,34 @@
 ﻿#include "./Header/EngineGeneral.h"
+#include "./Header/DirectXInit.h"
+#include "./Header/DrawPolygon.h"
+#include "./Header/Camera.h"
+#include "./Input/Input.h"
+#include "./Header/Parameter.h"
 
 namespace Engine
 {
+void EngineInit(const WCHAR title[], const float clearColor[4], int width, int height)
+{
+	DirectXInit* w = DirectXInit::GetInstance();
+
+#ifdef _DEBUG
+	//DirectXInit::EngineDebug = true;
+#endif // _DEBUG
+
+	w->title = title;
+	for (UINT i = 0; i < 4; i++)
+	{
+		w->clearColor[i] = clearColor[i];
+	}
+	w->SetWindowSize(width, height);
+	w->Init();
+
+	Camera::Init();
+	Input::Init();
+
+	Parameter::Set("white1x1", Library::DrawPolygon::GetInstance()->LoadTextrue((StringToWString(engineResourcesDir) + L"white.png").c_str()));
+}
+
 std::wstring StringToWString(const std::string& s)
 {
 	// バッファサイズの取得

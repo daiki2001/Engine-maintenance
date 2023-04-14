@@ -1,5 +1,6 @@
 ﻿#include "SceneManager.h"
 #include "./Header/DirectXInit.h"
+#include "./Header/DrawPolygon.h"
 #include "./Header/Camera.h"
 #include "./Input/Input.h"
 
@@ -11,14 +12,14 @@
 #include "../Scene/StageSelectScene.h"
 
 #include "./Header/Parameter.h"
+#include "../UI.h"
 #include "./Header/Error.h"
 
 PostEffect SceneManager::postEffect;
 
-SceneManager::SceneManager(DrawPolygon* draw) :
-	draw(draw)
+SceneManager::SceneManager()
 {
-	BaseScene::StaticInit(this->draw);
+	UI::StaticInit();
 	postEffect.Init();
 
 	if (DirectXInit::EngineDebug)
@@ -34,12 +35,14 @@ SceneManager::SceneManager(DrawPolygon* draw) :
 
 void SceneManager::Loop() const
 {
+	static auto w = DirectXInit::GetInstance();
+	static auto draw = Library::DrawPolygon::GetInstance();
+
 	sceneStack.top()->Update();
 	sceneStack.top()->ChengeTitleScene(Input::IsKeyTrigger(DIK_F1));
 	BaseScene::ChangeAnimationUpdate();
 	Camera::Update();
 
-	static auto w = DirectXInit::GetInstance();
 	postEffect.PreDraw();
 	draw->SetDrawBlendMode(ShaderManager::BlendMode::ALPHA);
 	sceneStack.top()->Draw();
@@ -48,6 +51,7 @@ void SceneManager::Loop() const
 	w->ClearScreen();
 	// 背景
 	sceneStack.top()->BGDraw();
+	// オブジェクト
 	postEffect.Draw();
 	// 前景
 	sceneStack.top()->UIDraw();

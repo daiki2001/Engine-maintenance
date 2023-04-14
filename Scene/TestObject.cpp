@@ -1,4 +1,5 @@
 #include "TestObject.h"
+#include "./Header/DrawPolygon.h"
 #include "./Header/Camera.h"
 #include "./Header/SafeDelete.h"
 #include "./Header/Color.h"
@@ -14,7 +15,6 @@ TestObject* TestObject::Get()
 
 TestObject::TestObject() :
 	OBJData(),
-	draw(nullptr),
 	object(-1),
 	isObj(false)
 {
@@ -22,8 +22,6 @@ TestObject::TestObject() :
 
 TestObject::~TestObject()
 {
-	safe_delete(draw);
-
 	OBJData::~OBJData();
 }
 
@@ -39,9 +37,10 @@ void TestObject::Update()
 
 void TestObject::Draw()
 {
+	auto draw = Library::DrawPolygon::GetInstance();
 	static OBJData* objData = nullptr;
-	objData = draw->GetObjData(object);
 
+	objData = draw->GetObjData(object);
 	if (isObj)
 	{
 		draw->DrawOBJ(object, objData->position, objData->rotation, objData->scale);
@@ -54,15 +53,11 @@ void TestObject::Draw()
 
 int TestObject::CreateModel(const char* filePath, const char* directoryPath)
 {
+	auto draw = Library::DrawPolygon::GetInstance();
+
 	if (object != -1)
 	{
 		return 0;
-	}
-
-	if (draw == nullptr)
-	{
-		Engine::ErrorLog("描画用オブジェクトがありません\n", true);
-		return Engine::FUNCTION_ERROR;
 	}
 
 	if (filePath == nullptr || directoryPath == nullptr)
@@ -81,5 +76,6 @@ int TestObject::CreateModel(const char* filePath, const char* directoryPath)
 
 void TestObject::OnCollision(const CollisionInfo& info)
 {
-	draw->DrawString(0.0f, 0.0f, 1.0f, Color::AddAlphaValue(Color::WHITE, 1.0f), "Hit");
+	Library::DrawPolygon::GetInstance()->DrawString(0.0f, 0.0f, 1.0f, Color::AddAlphaValue(Color::WHITE, 1.0f),
+					 Color::AddAlphaValue(Color::BLACK, 0.5f), "Hit");
 }

@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "./Header/EngineGeneral.h"
+#include "./Math/EngineMath.h"
 #include <vector>
 
 class Camera final
@@ -13,9 +13,8 @@ private:
 	Camera operator=(const Camera&) = delete;
 
 private: // エイリアス
-	using XMVECTOR = DirectX::XMVECTOR;
-	using Vector3 = Math::Vector3;
-	using Matrix4 = Math::Matrix4;
+	using Vector3 = Engine::Math::Vector3;
+	using Matrix4 = Engine::Math::Matrix4;
 
 public: // サブクラス
 	enum Projection
@@ -50,9 +49,9 @@ public: // 静的メンバ関数
 	static void Update();
 
 	// キャラクタ姿勢行列の生成
-	static Matrix4 CreateCamera(const XMVECTOR& pos, const XMVECTOR& target, const XMVECTOR& upVector);
+	static Matrix4 CreateCamera(const DirectX::XMVECTOR& pos, const DirectX::XMVECTOR& target, const DirectX::XMVECTOR& upVector);
 	// キャラクタ姿勢束縛行列の生成
-	static Matrix4 CreateCameraFix(const XMVECTOR& pos, const XMVECTOR& target, const XMVECTOR& upVector);
+	static Matrix4 CreateCameraFix(const DirectX::XMVECTOR& pos, const DirectX::XMVECTOR& target, const DirectX::XMVECTOR& upVector);
 
 	// カメラの切り替え
 	static int ChangeCamera(const size_t& cameraNo);

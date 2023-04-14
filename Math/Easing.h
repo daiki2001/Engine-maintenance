@@ -11,6 +11,7 @@ struct Ease
 	Vector3 start = Vector3::Zero();
 	Vector3 end = Vector3::Zero();
 	float time = 0.0f;
+	float addTime = 0.0f;
 	bool isAlive = false;
 };
 

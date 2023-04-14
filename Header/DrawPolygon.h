@@ -1,10 +1,28 @@
 ﻿#pragma once
 #include "DebugText.h"
 #include <d3dx12.h>
-#include "./Header/Camera.h"
+#include "./Math/EngineMath.h"
+#include <vector>
 
+namespace Engine
+{
+namespace Library
+{
 class DrawPolygon final : public DebugText
 {
+private: //シングルトン化
+	DrawPolygon();
+	DrawPolygon(const DrawPolygon&) = delete;
+	~DrawPolygon();
+	const DrawPolygon& operator=(const DrawPolygon&) = delete;
+public:
+	static DrawPolygon* GetInstance();
+
+private: // エイリアス
+	using Vector3 = Engine::Math::Vector3;
+	template <class T>
+	using vector = std::vector<T>;
+
 public: // メンバ変数
 	Vector3 light;    //光源
 private:
@@ -21,11 +39,6 @@ private:
 	bool isDrawOBJPolygonInit = false;
 
 public: // メンバ関数
-	// コンストラクタ
-	DrawPolygon();
-	// デストラクタ
-	~DrawPolygon();
-
 	// 三角形の作成
 	int CreateTriangle(const Vector3& vertex1, const DirectX::XMFLOAT2& uv1,
 					   const Vector3& vertex2, const DirectX::XMFLOAT2& uv2,
@@ -38,7 +51,9 @@ public: // メンバ関数
 	// 直方体の作成
 	int Create3Dbox(float width, float height, float depth, bool isFill = true);
 	int Create3Dbox(Vector3 size, bool isFill = true)
-	{ return Create3Dbox(size.x, size.y, size.z, isFill); };
+	{
+		return Create3Dbox(size.x, size.y, size.z, isFill);
+	};
 	// 正多角錐の作成
 	int CreateCorn(float r, float h, const size_t& divNum, bool isFill = true);
 	// 正多角柱の作成
@@ -96,3 +111,5 @@ private:
 	// データの消去
 	void DataClear();
 };
+} //Library
+} //Engine

@@ -5,6 +5,9 @@
 #include "Color.h"
 #include "Error.h"
 
+#include <string>
+#include <random>
+
 /*定数*/
 namespace Engine
 {
@@ -16,6 +19,9 @@ static const std::string shadersDirectory = engineResourcesDir + "shaders/"; //�
 /*関数*/
 namespace Engine
 {
+// エンジンの初期化
+void EngineInit(const WCHAR title[], const float clearColor[4], int width, int height);
+
 std::wstring StringToWString(const std::string& s);
 std::string WStringToString(const std::wstring& s);
 
@@ -55,6 +61,15 @@ void ContainerClear(T& std)
 {
 	std.clear();
 	std.shrink_to_fit();
+}
+
+template <class T>
+T RandomNumber(const T& high, const T& low)
+{
+	static std::mt19937 randEngine{ std::random_device{}() };
+	std::uniform_real_distribution<T> dist(low, high);
+
+	return dist(randEngine);
 }
 } //Engine
 

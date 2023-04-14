@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "./Header/DirectDrawing.h"
-#include "./Header/DrawPolygon.h"
 
 class TestObject final : private OBJData
 {
@@ -28,11 +27,8 @@ public: // メンバ関数
 
 	int CreateModel(const char* filePath = nullptr, const char* directoryPath = nullptr);
 	void SetModel(int objectData) { object = objectData; }
-	void SetDraw(DrawPolygon* draw) { this->draw = draw; }
 
 private: // メンバ変数
-	DrawPolygon* draw; //描画用オブジェクト
-
 	int object; //オブジェクト
 	bool isObj;
 };

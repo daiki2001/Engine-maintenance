@@ -31,11 +31,13 @@ public: // メンバ関数
 	/// </summary>
 	/// <param name="posX, posY"> 文字列を描画する領域の左上の座標 </param>
 	/// <param name="fontScale"> 文字の大きさ（倍率） </param>
-	/// <param name="color"> 色（RGBA） </param>
+	/// <param name="color1"> フォント色（RGBA） </param>
+	/// <param name="color2"> 背景色（RGBA） </param>
 	/// <param name="text"> 描画したい書式付き文字列のアドレス </param>
 	/// <param name="..."> 書式付き文字列に付随する引数 </param>
 	/// <returns> 0で成功 </returns>
-	HRESULT DrawString(float posX, float posY, float fontScale, const XMFLOAT4& color,
+	HRESULT DrawString(float posX, float posY, float fontScale,
+					   const XMFLOAT4& color1, const XMFLOAT4& color2,
 					   const char* text, ...);
 
 	// ループ終わり（デバッグテキスト版）

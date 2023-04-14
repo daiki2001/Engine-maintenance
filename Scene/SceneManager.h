@@ -11,8 +11,7 @@ private: //静的メンバ変数
 	static PostEffect postEffect;
 
 public: // メンバ関数
-	SceneManager() = delete;
-	SceneManager(DrawPolygon* draw);
+	SceneManager();
 	~SceneManager() {}
 
 	void Loop() const;
@@ -20,6 +19,5 @@ public: // メンバ関数
 	int PopScene() override;
 
 private: // メンバ変数
-	DrawPolygon* draw;
 	std::stack<std::shared_ptr<BaseScene>> sceneStack;
 };

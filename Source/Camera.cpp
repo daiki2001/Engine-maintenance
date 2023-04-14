@@ -1,5 +1,6 @@
 ﻿#include "./Header/Camera.h"
 #include "./Header/DirectXInit.h"
+#include "./Header/EngineGeneral.h"
 
 const size_t Camera::MAIN_CAMERA = 0;
 
@@ -80,7 +81,7 @@ void Camera::Update()
 	SetCamera(pos, target, upVec);
 }
 
-Math::Matrix4 Camera::CreateCamera(const XMVECTOR& pos, const XMVECTOR& target, const XMVECTOR& upVector)
+Math::Matrix4 Camera::CreateCamera(const DirectX::XMVECTOR& pos, const DirectX::XMVECTOR& target, const DirectX::XMVECTOR& upVector)
 {
 	using namespace DirectX;
 
@@ -114,7 +115,7 @@ Math::Matrix4 Camera::CreateCamera(const XMVECTOR& pos, const XMVECTOR& target, 
 	return mat;
 }
 
-Math::Matrix4 Camera::CreateCameraFix(const XMVECTOR& pos, const XMVECTOR& target, const XMVECTOR& upVector)
+Math::Matrix4 Camera::CreateCameraFix(const DirectX::XMVECTOR& pos, const DirectX::XMVECTOR& target, const DirectX::XMVECTOR& upVector)
 {
 	using namespace DirectX;
 

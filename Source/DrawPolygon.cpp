@@ -13,6 +13,10 @@ ShaderManager* shaderMgr = ShaderManager::Get();
 static const VertexData defaultVertexData{};
 }
 
+namespace Engine
+{
+namespace Library
+{
 DrawPolygon::DrawPolygon() :
 	DebugText(),
 	polygonCount(0),
@@ -28,6 +32,12 @@ DrawPolygon::DrawPolygon() :
 DrawPolygon::~DrawPolygon()
 {
 	DataClear();
+}
+
+DrawPolygon* DrawPolygon::GetInstance()
+{
+	static DrawPolygon instance;
+	return &instance;
 }
 
 int DrawPolygon::CreateTriangle(
@@ -1469,3 +1479,5 @@ void DrawPolygon::Circle(const Vector3& centerPos, float r, const size_t& divNum
 
 	return;
 }
+} //Library
+} //Engine

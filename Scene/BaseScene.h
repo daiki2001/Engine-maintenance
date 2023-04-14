@@ -1,19 +1,13 @@
 ﻿#pragma once
-#include "./Header/DrawPolygon.h"
 #include "SceneChange.h"
 #include "SceneChangeAnimation.h"
 
 class BaseScene
 {
 protected: //静的メンバ変数
-	static DrawPolygon* draw;
 	static SceneChangeAnimation changeAnimation;
 
 public: //静的メンバ関数
-	static void StaticInit(DrawPolygon* draw) {
-		BaseScene::draw = draw;
-		SceneChangeAnimation::StaticInit(draw);
-	}
 	static void ChangeAnimationUpdate() { changeAnimation.Update(); }
 	static void ChangeAnimationDraw() { changeAnimation.Draw(); }
 

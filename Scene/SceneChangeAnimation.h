@@ -1,14 +1,7 @@
 ﻿#pragma once
-#include "./Header/DrawPolygon.h"
 
 class SceneChangeAnimation
 {
-private: //静的メンバ変数
-	static DrawPolygon* draw;
-
-public: //静的メンバ関数
-	static void StaticInit(DrawPolygon* draw) { SceneChangeAnimation::draw = draw; }
-
 private: //メンバ変数
 	bool isAnimation; //シーン遷移のアニメーションが行われているかどうか
 	bool isChange;    //シーン遷移するかどうか
@@ -22,7 +15,7 @@ private: //メンバ変数
 	int sound;  //SE
 
 public: //メンバ関数
-	SceneChangeAnimation(DrawPolygon* draw);
+	SceneChangeAnimation();
 	~SceneChangeAnimation();
 
 	void Init();
